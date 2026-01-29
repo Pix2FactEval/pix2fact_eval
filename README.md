@@ -2,7 +2,10 @@
   <img src="assets/logo1_pix2fact.png" alt="Pix2Fact Logo" width="120">
 </p>
 
-[![Dataset on HF](https://huggingface.co/datasets/huggingface/badges/resolve/main/dataset-on-hf-sm.svg)](https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark)
+<p align="center">
+        &nbsp&nbsp🤗 <a href="https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark">Hugging Face Dataset</a>&nbsp</a>&nbsp&nbsp | &nbsp&nbsp📑 <a href="">Paper</a>&nbsp&nbsp
+<br>
+
 
 A visual QA benchmark evaluating expert-level perception and knowledge-intensive multi-hop reasoning—SOTA VLMs reach only 24% accuracy vs. 56% human performance.
 
@@ -11,7 +14,7 @@ A visual QA benchmark evaluating expert-level perception and knowledge-intensive
 > [**From Pixels to Facts (Pix2Fact): Benchmarking Multi-Hop Reasoning for Fine-Grained Visual Fact Checking**]()<br>
 > [Yifan Jiang](), [Cong Zhang](), [Bofei Zhang](), [Yifan Yang](), [Bingzhang Wang](), [Yew Soon Ong]()
 <p align="center">
-  <img src="assets/teaser.png" alt="Pix2Fact Logo" width="480">
+  <img src="assets/teaser.png" alt="Pix2Fact Logo" width="100%">
 </p>
 
 ---
