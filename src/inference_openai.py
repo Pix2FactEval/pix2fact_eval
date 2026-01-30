@@ -208,7 +208,7 @@ def main():
     logger.info(f"Loading data from {args.input_csv}")
     try:
         full_df = pd.read_csv(args.input_csv)
-        full_df = full_df.head(5)
+        # full_df = full_df.head(5)
         logger.info(f"Successfully loaded {len(full_df)} total rows.")
     except Exception as e:
         logger.error(f"Failed to load data: {e}")
