@@ -19,9 +19,9 @@ A visual QA benchmark evaluating expert-level perception and knowledge-intensive
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
-### Install
+### 🔍 Install
 We use `uv` to manage this environment. To use uv, checkout [here](https://docs.astral.sh/uv/getting-started/installation/). After you install uv, simply do:
 ```bash
 git clone https://github.com/Pix2FactEval/pix2fact_eval.git
@@ -38,7 +38,7 @@ uv run src/downlaod_data.py data
 ```
 Also, it's okay to follow HF to manually download this data. The HF dataset is [here](https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark/tree/main). We also have [a csv file](https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark/resolve/main/Pix2Fact_1k.csv) contains all items in benchmark.
 
-### Run Inference and Judge
+### 🚗 Run Inference and Judge
 In our experiment, we mainly use `openai` compatible format to call api. To use the api, you should configure `.env` based on your model provider. Checkout `.env.example` for an example. To run inferce, execute this:
 ```bash
 uv run src/inference_openai.py 
@@ -49,7 +49,7 @@ uv run src/judge.py --input_csv outputs/pix2fact_eval/Pix2Fact_QA_cases_1k_gpt_5
 ```
 We recommend use `gpt-4o-2024-11-20` to for judge script.
 
-### Notes for non-OpenAI models
+### 📓 Notes for non-OpenAI models
 #### Gemini
 We use `openai` package to test gemini-2.5 and gemini-3. To use their search api, we called the `chat` api with the following code snippet:
 ```python
@@ -103,4 +103,8 @@ If you use Pix2Fact in your research, please cite:
 
 ## License
 
-*To be specified.*
+MIT
+
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Pix2FactEval/pix2fact_eval&type=Date)](https://www.star-history.com/#Pix2FactEval/pix2fact_eval&Date)
