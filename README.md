@@ -17,7 +17,6 @@ A visual QA benchmark evaluating expert-level perception and knowledge-intensive
   <img src="assets/teaser.png" alt="Pix2Fact Logo" width="100%">
 </p>
 
----
 
 ## 🚀 Getting Started
 
@@ -84,7 +83,6 @@ response = client.responses.create(
 ```
 Please check their official documentation for parameters of web search.
 
----
 
 ## Citation
 
@@ -99,7 +97,6 @@ If you find our paper and code useful in your research, please consider giving a
 }
 ```
 
----
 
 ## 🌟 Star History
 If you find our paper and code useful in your research, please consider giving a star ⭐ and citation 📝 :)
