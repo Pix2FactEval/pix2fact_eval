@@ -31,7 +31,7 @@ uv venv
 uv sync
 ```
 This will install a virtual env.
-### Get Dataset
+### 📚 Get Dataset
 You can use this script to do the download, this script will download image files and csv file to a local folder:
 ```bash
 uv run src/download_data.py data
