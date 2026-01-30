@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-        &nbsp&nbsp🤗 <a href="https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark">Hugging Face Dataset</a>&nbsp</a>&nbsp&nbsp | &nbsp&nbsp📑 <a href="">Paper</a>&nbsp&nbsp
+        &nbsp;&nbsp;🤗 <a href="https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark">Hugging Face Dataset</a>&nbsp;&nbsp; | &nbsp;&nbsp;📑 <a href="">Paper</a>&nbsp;&nbsp;
 <br>
 
 
@@ -34,24 +34,24 @@ This will install a virtual env.
 ### Get Dataset
 You can use this script to do the download, this script will download image files and csv file to a local folder:
 ```bash
-uv run src/downlaod_data.py data
+uv run src/download_data.py data
 ```
-Also, it's okay to follow HF to manually download this data. The HF dataset is [here](https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark/tree/main). We also have [a csv file](https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark/resolve/main/Pix2Fact_1k.csv) contains all items in benchmark.
+Also, it's okay to follow HF to manually download this data. The HF dataset is [here](https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark/tree/main). We also have [a csv file](https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark/resolve/main/Pix2Fact_1k.csv) that contains all items in the benchmark.
 
 ### 🚗 Run Inference and Judge
-In our experiment, we mainly use `openai` compatible format to call api. To use the api, you should configure `.env` based on your model provider. Checkout `.env.example` for an example. To run inferce, execute this:
+In our experiment, we mainly use `openai` compatible format to call api. To use the api, you should configure `.env` based on your model provider. Checkout `.env.example` for an example. To run inference, execute this:
 ```bash
 uv run src/inference_openai.py 
 ```
-Taking `gpt-5-2025-08-07` as an example, exeute this script with default parameters will finally gives use a csv file `outputs/pix2fact_eval/Pix2Fact_QA_cases_1k_gpt_5_2025_08_07.csv`. Then, you can use judge script:
+Taking `gpt-5-2025-08-07` as an example, executing this script with default parameters will finally give us a csv file `outputs/pix2fact_eval/Pix2Fact_QA_cases_1k_gpt_5_2025_08_07.csv`. Then, you can use judge script:
 ```bash
 uv run src/judge.py --input_csv outputs/pix2fact_eval/Pix2Fact_QA_cases_1k_gpt_5_2025_08_07.csv
 ```
-We recommend use `gpt-4o-2024-11-20` to for judge script.
+We recommend using `gpt-4o-2024-11-20` for the judge script.
 
 ### 📓 Notes for non-OpenAI models
 #### Gemini
-We use `openai` package to test gemini-2.5 and gemini-3. To use their search api, we called the `chat` api with the following code snippet:
+We use `openai` package to test gemini-2.5 and gemini-3. To use their search api, we call the `chat` API with the following code snippet:
 ```python
 response = client.chat.completions.create(
     model=model_name,
@@ -66,10 +66,10 @@ response = client.chat.completions.create(
     ]
 )
 ```
-`google_search` is inside tool that gemini official api will provide. You don't need to worry about how the tool is executed and how to handle the response.
+`google_search` is a built-in tool that the Gemini official API provides. You don't need to worry about how the tool is executed and how to handle the response.
 
 #### Doubao
-We use volcano engine to run doubao and doubao use `responses` api to handle search engine:
+We use volcano engine to run doubao and doubao uses the `responses` API to handle search engine:
 ```python
 # endpoint https://ark.cn-beijing.volces.com/api/v3
 response = client.responses.create(
@@ -82,7 +82,7 @@ response = client.responses.create(
     max_output_tokens=16000
 )
 ```
-Please check their offical documentation for parameter of web search.
+Please check their official documentation for parameters of web search.
 
 ---
 
