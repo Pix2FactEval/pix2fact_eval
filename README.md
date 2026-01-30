@@ -83,6 +83,7 @@ response = client.responses.create(
 )
 ```
 Please check their offical documentation for parameter of web search.
+
 ---
 
 ## Citation
