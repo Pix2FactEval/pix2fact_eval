@@ -49,6 +49,40 @@ uv run src/judge.py --input_csv outputs/pix2fact_eval/Pix2Fact_QA_cases_1k_gpt_5
 ```
 We recommend use `gpt-4o-2024-11-20` to for judge script.
 
+### Notes for non-OpenAI models
+#### Gemini
+We use `openai` package to test gemini-2.5 and gemini-3. To use their search api, we called the `chat` api with the following code snippet:
+```python
+response = client.chat.completions.create(
+    model=model_name,
+    messages=messages,
+    max_tokens=max_tokens,
+    temperature=0,
+    top_p=0.9,
+    tools=[
+        {
+            "type": "google_search"
+        }
+    ]
+)
+```
+`google_search` is inside tool that gemini official api will provide. You don't need to worry about how the tool is executed and how to handle the response.
+
+#### Doubao
+We use volcano engine to run doubao and doubao use `responses` api to handle search engine:
+```python
+# endpoint https://ark.cn-beijing.volces.com/api/v3
+response = client.responses.create(
+    model=model_name,
+    input=messages,
+    temperature=0,
+    tools = [
+        {"type": "web_search", "max_keyword": 10}
+    ],
+    max_output_tokens=16000
+)
+```
+Please check their offical documentation for parameter of web search.
 ---
 
 ## Citation
