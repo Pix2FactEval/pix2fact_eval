@@ -38,7 +38,7 @@ uv run src/downlaod_data.py data
 ```
 Also, it's okay to follow HF to manually download this data. The HF dataset is [here](https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark/tree/main). We also have [a csv file](https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark/resolve/main/Pix2Fact_1k.csv) contains all items in benchmark.
 
-### Run Inference
+### Run Inference and Judge
 In our experiment, we mainly use `openai` compatible format to call api. To use the api, you should configure `.env` based on your model provider. Checkout `.env.example` for an example. To run inferce, execute this:
 ```bash
 uv run src/inference_openai.py 
