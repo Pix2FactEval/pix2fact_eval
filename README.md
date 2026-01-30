@@ -32,18 +32,17 @@ uv sync
 ```
 This will install a virtual env.
 ### Get Dataset
-You can use this script to do the download:
+You can use this script to do the download, this script will download image files and csv file to a local folder:
 ```bash
 uv run src/downlaod_data.py data
 ```
-Also, it's okay to follow HF to manually download this data. The HF dataset is [here](https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark/tree/main). We also have [a csv file](https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark/resolve/main/) contains all items in benchmark.
+Also, it's okay to follow HF to manually download this data. The HF dataset is [here](https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark/tree/main). We also have [a csv file](https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark/resolve/main/Pix2Fact_1k.csv) contains all items in benchmark.
 
 ### Run Inference
 In our experiment, we mainly use `openai` compatible format to call api. To use the api, you should configure `.env` based on your model provider. Checkout `.env.example` for an example. To run inferce, execute this:
 ```bash
 uv run src/inference_openai.py 
 ```
-
 Taking `gpt-5-2025-08-07` as an example, exeute this script with default parameters will finally gives use a csv file `outputs/pix2fact_eval/Pix2Fact_QA_cases_1k_gpt_5_2025_08_07.csv`. Then, you can use judge script:
 ```bash
 uv run src/judge.py --input_csv outputs/pix2fact_eval/Pix2Fact_QA_cases_1k_gpt_5_2025_08_07.csv
