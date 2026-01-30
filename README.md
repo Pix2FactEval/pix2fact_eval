@@ -88,7 +88,7 @@ Please check their official documentation for parameters of web search.
 
 ## Citation
 
-If you use Pix2Fact in your research, please cite:
+If you find our paper and code useful in your research, please consider giving a star ⭐ and citation 📝 :)
 
 ```bibtex
 @article{jiang2025pix2fact,
@@ -106,5 +106,6 @@ If you use Pix2Fact in your research, please cite:
 MIT
 
 ## 🌟 Star History
+If you find our paper and code useful in your research, please consider giving a star ⭐ and citation 📝 :)
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Pix2FactEval/pix2fact_eval&type=Date)](https://www.star-history.com/#Pix2FactEval/pix2fact_eval&Date)
