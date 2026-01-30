@@ -101,11 +101,12 @@ If you find our paper and code useful in your research, please consider giving a
 
 ---
 
-## License
-
-MIT
-
 ## 🌟 Star History
 If you find our paper and code useful in your research, please consider giving a star ⭐ and citation 📝 :)
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Pix2FactEval/pix2fact_eval&type=Date)](https://www.star-history.com/#Pix2FactEval/pix2fact_eval&Date)
+
+## License
+
+MIT
+
