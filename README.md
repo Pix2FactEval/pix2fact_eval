@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-        &nbsp;&nbsp;🤗 <a href="https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark">Hugging Face Dataset</a>&nbsp;&nbsp; | &nbsp;&nbsp;📑 <a href="">Paper</a>&nbsp;&nbsp;
+        &nbsp;&nbsp;🤗 <a href="https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark">Hugging Face Dataset</a>&nbsp;&nbsp; | &nbsp;&nbsp;📑 <a href="https://arxiv.org/abs/2602.00593">Paper</a>&nbsp;&nbsp;
 <br>
 
 
