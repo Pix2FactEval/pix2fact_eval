@@ -7,7 +7,6 @@ Your entire output MUST be a single, valid JSON object.
 Your response MUST start with { and end with }.
 DO NOT output ANY text, explanations, apologies, or markdown formatting (like ```json) before or after the JSON object. Your response must be the raw JSON and nothing else.
 The JSON object MUST contain these exact five key: "Observation", "Search Plan", "Search Query", "Comprehensive Answer", and "Final Answer". Adhere strictly to this schema.
-Limit your reasoning token under 4000. Do not use function call to address this task.
 --- KEY DEFINITIONS & SCHEMA ---
 "Observation": (String) Describe specific visual details from the image URL relevant to the question.
 "Search Plan": (List of Strings) Outline a step-by-step plan to find the necessary information online.
