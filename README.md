@@ -1,10 +1,24 @@
-# Pix2Fact
+<p align="center">
+  <img src="assets/logo1_pix2fact.png" alt="Pix2Fact Logo" width="140">
+</p>
 
-Code artifact for **Pix2Fact: When Vision Is Not Enough — Benchmarking Fine-Grained VQA with Web Verification on High-Resolution Real-World Scenes**.
+<h1 align="center">Pix2Fact: When Vision Is Not Enough</h1>
 
-Project page: https://fanfan7589.github.io/pix2fact/
+<p align="center">
+  <strong>Benchmarking Fine-Grained VQA with Web Verification on High-Resolution Real-World Scenes</strong>
+</p>
 
-Paper: https://arxiv.org/abs/2602.00593
+<p align="center">
+  <a href="https://fanfan7589.github.io/pix2fact/">Project Page</a> |
+  <a href="https://arxiv.org/abs/2602.00593">Paper</a>
+</p>
+
+<p align="center">
+  <img alt="Benchmark" src="https://img.shields.io/badge/Benchmark-Pix2Fact-4B7BEC">
+  <img alt="Questions" src="https://img.shields.io/badge/Questions-1,000-20BF6B">
+  <img alt="Scenes" src="https://img.shields.io/badge/Scenes-4K%2B_real--world-FA8231">
+  <img alt="Task" src="https://img.shields.io/badge/Task-VQA_%2B_Web_Search-8854D0">
+</p>
 
 Pix2Fact is a visual question-answering benchmark of 1,000 expert-crafted questions on 4K+ real-world scenes. Each answer requires both fine-grained visual grounding and open-web knowledge search.
 
