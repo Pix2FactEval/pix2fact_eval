@@ -37,7 +37,7 @@ dotenv.load_dotenv()
 DEFAULT_INPUT_CSV = "data/Pix2Fact_1k.csv"
 DEFAULT_IMAGE_DIR = "data"
 DEFAULT_OUTPUT_DIR = "outputs/pix2fact_eval_agent"
-DEFAULT_QUESTION_COLUMN = "[Final]question"
+DEFAULT_QUESTION_COLUMN = "question"
 DEFAULT_IMAGE_COLUMN = "local_image_path"
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "EMPTY")
@@ -387,7 +387,7 @@ def process_row(
 # ---------------------------------------------------------------------------
 
 def build_output_csv_name(model_name: str) -> str:
-    normalized = model_name.replace("/", "_").replace("-", "_")
+    normalized = model_name.replace("/", "_").replace("-", "_").replace(":", "_")
     return f"Pix2Fact_with_response_{normalized}.csv"
 
 
@@ -401,6 +401,7 @@ def main() -> None:
     parser.add_argument("--model_name", default=DEFAULT_MODEL_NAME, help="Model name / deployment ID")
     parser.add_argument("--max_workers", type=int, default=16, help="Number of parallel worker threads")
     parser.add_argument("--start_index", type=int, default=0, help="Skip this many rows from the top")
+    parser.add_argument("--max_rows", type=int, default=0, help="If > 0, only run this many rows.")
     parser.add_argument(
         "--retries", type=int, default=20,
         help="Retries: wait for local image file if missing, and retry each API call",
@@ -435,11 +436,11 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.output_dir is None:
-        model_slug = args.model_name.replace("/", "_").replace("-", "_")
+        model_slug = args.model_name.replace("/", "_").replace("-", "_").replace(":", "_")
         args.output_dir = f"{DEFAULT_OUTPUT_DIR}_{model_slug}"
 
     output_dir = Path(args.output_dir)
-    model_slug = args.model_name.replace("/", "_").replace("-", "_")
+    model_slug = args.model_name.replace("/", "_").replace("-", "_").replace(":", "_")
     per_case_dir = output_dir / f"cases_{model_slug}"
     output_dir.mkdir(parents=True, exist_ok=True)
     per_case_dir.mkdir(parents=True, exist_ok=True)
@@ -455,6 +456,8 @@ def main() -> None:
 
     if args.start_index > 0:
         df = df.iloc[args.start_index:].copy()
+    if args.max_rows > 0:
+        df = df.head(args.max_rows).copy()
 
     all_results: list[dict[str, Any]] = []
     with ThreadPoolExecutor(max_workers=max(1, args.max_workers)) as executor:

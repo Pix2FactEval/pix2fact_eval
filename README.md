@@ -26,6 +26,22 @@ Pix2Fact is a visual question-answering benchmark of 1,000 expert-crafted questi
 
 ## Dataset
 
+The dataset is hosted at [pix2fact/Pix2FactBenchmark](https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark). Hugging Face serves it as parquet with one `default` subset and a `train` split of 1,000 rows. The main fields are:
+
+| Column | Type | Description |
+| --- | --- | --- |
+| `image` | image | The benchmark image decoded by `datasets`. |
+| `question` | string | The visual + web verification question. |
+| `answer` | string | The ground-truth final answer. |
+| `index` | string | Dataset case id. |
+| `local_image_path` | string | Suggested local filename/path for the image. |
+| `search_query` | string | Reference search query or entity hint. |
+| `bounding_box` | string | Region annotation used by crop settings. |
+| `evidence_1/2/3` | string | Human evidence notes. |
+| `evidence_url_1/2/3` | string | Supporting URLs. |
+| `category` | string | Scene category. |
+| `image_resolution` | string | Original image resolution. |
+
 The benchmark covers eight everyday scene categories:
 
 | Category | Questions |
@@ -39,14 +55,48 @@ The benchmark covers eight everyday scene categories:
 | Landmarks & attractions | 103 |
 | Cityscape & aerial | 90 |
 
-Prepare the CSV and images under `data/`. The default scripts expect:
+### Download from HF parquet
+
+The recommended path is to use the Hugging Face `datasets` parquet backend and export a local CSV plus images:
+
+```bash
+uv run python -m src.download_hf_dataset --output_dir data
+```
+
+This writes:
 
 ```text
 data/Pix2Fact_1k.csv
-data/images/
+data/<local_image_path files>
 ```
 
-If your image paths in the CSV are relative paths, pass `--image_dir data`. If your images are flat files, pass the directory that contains those files.
+For a quick local smoke test, export only one row:
+
+```bash
+uv run python -m src.download_hf_dataset --output_dir data --limit 1
+```
+
+### Iterate over samples
+
+You can also read the parquet dataset directly:
+
+```python
+from datasets import load_dataset
+
+ds = load_dataset("pix2fact/Pix2FactBenchmark", split="train")
+sample = ds[0]
+
+print(sample["question"])
+print(sample["answer"])
+print(sample["local_image_path"])
+sample["image"].save("sample.jpg")
+
+for row in ds:
+    question = row["question"]
+    image = row["image"]
+    answer = row["answer"]
+    # call your model here
+```
 
 ## Install
 
@@ -74,19 +124,30 @@ The project page reports Gemini-3.1-Pro as the best listed model at 51.7% in C4,
 
 ## OpenRouter Inference
 
-Run with search:
+### One-sample model call
+
+After exporting one or more samples, run one case through an OpenRouter-compatible model:
 
 ```bash
 uv run python -m src.inference_openrouter_with_search_v2 \
   --input_csv data/Pix2Fact_1k.csv \
   --image_dir data \
-  --max_workers 4 \
   --model_name x-ai/grok-4.20:online \
-  --output_dir outputs/pix2fact_eval_grok \
+  --output_dir outputs/pix2fact_eval_smoke \
+  --max_workers 1 \
+  --max_rows 1 \
   --retries 3
 ```
 
-Run without search by using a non-online model:
+This produces a CSV like:
+
+```text
+outputs/pix2fact_eval_smoke/Pix2Fact_with_response_x_ai_grok_4.20_online.csv
+```
+
+### Batch with search
+
+Run all rows with search:
 
 ```bash
 uv run python -m src.inference_openrouter_with_search_v2 \
@@ -98,7 +159,23 @@ uv run python -m src.inference_openrouter_with_search_v2 \
   --retries 3
 ```
 
-Run with cropped images when the CSV includes a `bounding_box` column:
+### Batch without search
+
+Use a non-online model name:
+
+```bash
+uv run python -m src.inference_openrouter_with_search_v2 \
+  --input_csv data/Pix2Fact_1k.csv \
+  --image_dir data \
+  --max_workers 4 \
+  --model_name x-ai/grok-4.20 \
+  --output_dir outputs/pix2fact_eval_grok_no_search \
+  --retries 3
+```
+
+### Batch with cropped images
+
+Use `--crop_bbox` when the CSV includes `bounding_box`:
 
 ```bash
 uv run python -m src.inference_openrouter_with_search_v2 \
@@ -110,6 +187,20 @@ uv run python -m src.inference_openrouter_with_search_v2 \
   --retries 3 \
   --crop_bbox
 ```
+
+### Judge the output
+
+Judge a model output CSV:
+
+```bash
+uv run python -m src.judge_openrouter \
+  --input_csv outputs/pix2fact_eval_grok/Pix2Fact_with_response_x_ai_grok_4.20_online.csv \
+  --max_workers 4 \
+  --prompt_version v3 \
+  --model_name openai/gpt-5.4
+```
+
+For a smoke test, add `--max_rows 1`.
 
 ## Agent Inference
 
@@ -127,14 +218,26 @@ uv run python -m src.inference_agent_with_search \
 
 The agent path can use `SearchTool`, `VisitTool`, and `TerminateTool`. Configure `MODELHUB_SEARCH_URL`, `MODELHUB_SEARCH_API_KEY`, and `JINA_READER_API_KEY` in `.env` when enabling search/visit tools.
 
-## Judge
+## End-to-end smoke test
 
-The inference scripts write a CSV. Judge it with:
+The smallest connected flow is:
 
 ```bash
+uv run python -m src.download_hf_dataset --output_dir data --limit 1
+
+uv run python -m src.inference_openrouter_with_search_v2 \
+  --input_csv data/Pix2Fact_1k.csv \
+  --image_dir data \
+  --model_name x-ai/grok-4.20:online \
+  --output_dir outputs/pix2fact_eval_smoke \
+  --max_workers 1 \
+  --max_rows 1 \
+  --retries 3
+
 uv run python -m src.judge_openrouter \
-  --input_csv /path/to/your/csv \
-  --max_workers 4 \
+  --input_csv outputs/pix2fact_eval_smoke/Pix2Fact_with_response_x_ai_grok_4.20_online.csv \
+  --max_workers 1 \
+  --max_rows 1 \
   --prompt_version v3 \
   --model_name openai/gpt-5.4
 ```
