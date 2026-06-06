@@ -10,11 +10,13 @@
 
 <p align="center">
   <a href="https://fanfan7589.github.io/pix2fact/">Project Page</a> |
-  <a href="https://arxiv.org/abs/2602.00593">Paper</a>
+  <a href="https://arxiv.org/abs/2602.00593">Paper</a> |
+  <a href="https://huggingface.co/datasets/pix2fact/Pix2FactBenchmark">Dataset</a>
 </p>
 
 <p align="center">
   <img alt="Benchmark" src="https://img.shields.io/badge/Benchmark-Pix2Fact-4B7BEC">
+  <img alt="Dataset" src="https://img.shields.io/badge/Dataset-HuggingFace-FFD21E">
   <img alt="Questions" src="https://img.shields.io/badge/Questions-1,000-20BF6B">
   <img alt="Scenes" src="https://img.shields.io/badge/Scenes-4K%2B_real--world-FA8231">
   <img alt="Task" src="https://img.shields.io/badge/Task-VQA_%2B_Web_Search-8854D0">
